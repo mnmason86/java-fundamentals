@@ -1,5 +1,7 @@
 package basics;
-
+import java.util.Random;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Main {
@@ -8,6 +10,7 @@ public class Main {
     System.out.println(pluralize("dog", 0));
     System.out.println(pluralize("dog", 1));
     flipNHeads(6);
+    clock();
 
   }
 
@@ -20,20 +23,26 @@ public class Main {
   }
 
   private static void flipNHeads (int n){
+    Random randomNum = new Random();
     int flips = 0;
     int numberOfHeads = 0;
     while (numberOfHeads < n) {
-      double randomNum = Math.random();
-      if (randomNum >= 0.5){
+      if (randomNum.nextDouble() >= 0.5){
         System.out.println("heads");
         ++numberOfHeads;
         ++flips;
-      } else if (randomNum < 0.5) {
+      } else if (randomNum.nextDouble() < 0.5) {
         System.out.println("tails");
         numberOfHeads = 0;
         ++flips;
       } 
     }
     System.out.println("It took " + flips + " flips to flip " + n + " heads in a row");
+  }
+
+  private static void clock(){
+    LocalDateTime now = LocalDateTime.now();
+    String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    System.out.println(time);
   }
 }
