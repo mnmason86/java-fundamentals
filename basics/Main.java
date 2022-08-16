@@ -44,5 +44,12 @@ public class Main {
     LocalDateTime now = LocalDateTime.now();
     String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     System.out.println(time);
+    while(true){
+      String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+      if (!time.equals(currentTime)){
+        time = currentTime;
+        System.out.println(time);
+      }
+    }
   }
 }
