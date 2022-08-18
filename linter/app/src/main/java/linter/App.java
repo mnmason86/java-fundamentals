@@ -3,12 +3,40 @@
  */
 package linter;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    public static void main(String[] args) {
+        File gatesFile = new File("C:\\msys64\\home\\mnmas\\java-fundamentals\\linter\\app\\src\\main\\resources\\gates.js");
+        System.out.println(linter(gatesFile));
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static String linter(File someFile){
+        //create Scanner
+        String typeErrors = "";
+        try(Scanner myScanner = new Scanner(someFile)) {
+            //set line number
+            int location = 0;
+            while (myScanner.hasNextLine()) {
+                //if there are more lines, increment line location
+                location++;
+                //move to the next line
+                String currentLine = myScanner.nextLine();
+                //check conditions
+                if (currentLine.endsWith("{") || currentLine.endsWith("}") || currentLine.endsWith(";") || currentLine.contains("if") ||
+                        currentLine.contains("else")) {
+                    typeErrors = "";
+                } else {
+                    typeErrors += "Line " + location + ": missing semi-colon." + System.lineSeparator();
+                }
+                System.out.println(currentLine);
+            }
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        return typeErrors;
     }
 }
