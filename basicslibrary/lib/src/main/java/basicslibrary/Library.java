@@ -44,4 +44,37 @@ public class Library {
         }
         return lowestArray;
     }
+
+    public static String[] tempNotSeen(int[][] temperatureArray){
+        //use HashSet type int to track unique temperatures
+        HashSet<Integer> tempSet = new HashSet<>();
+
+        //iterate through temperatureArray to find min and max
+        int min = 150;
+        int max = 0;
+        for (int i = 0; i < temperatureArray.length; i++){
+            int [] dailyTemps = temperatureArray[i];
+            for (int j = 0; j < dailyTemps.length; j++) {
+                int currentTemp = dailyTemps[j];
+                if (currentTemp > max) {
+                    max = currentTemp;
+                }
+                if (currentTemp < min) {
+                    min = currentTemp;
+                }
+                //add unique temp to Hash Set
+                if (!tempSet.contains(dailyTemps[j])){
+                    tempSet.add(dailyTemps[j]);
+                }
+            }
+        }
+        String tempsNotFound = "High: " + max + " Low: " + min + " ";
+        for (int i = min; i <= max; i++) {
+            if (!tempSet.contains(i)) {
+                tempsNotFound = tempsNotFound + ("Never saw temperature: " + i + " ");
+            }
+        }
+            //return String result
+            return new String[]{tempsNotFound.toString()};
+    }
 }
