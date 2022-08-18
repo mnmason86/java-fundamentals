@@ -4,6 +4,10 @@
 package basicslibrary;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
@@ -45,9 +49,27 @@ class LibraryTest {
                 {55, 54, 60, 53, 59, 57, 61},
                 {65, 56, 55, 52, 55, 62, 57}
         };
-        String[] tempResults = Library.tempNotSeen(seattleWeatherArray);
-        //How to test?
+        String tempResults = Library.tempNotSeen(seattleWeatherArray);
+        assertTrue(tempResults.contains("63"));
+        assertTrue(tempResults.contains("67"));
+        assertTrue(tempResults.contains("68"));
+        assertTrue(tempResults.contains("69"));
     }
 
+    @Test void testVotes(){
+        List<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+
+        String voteResults = Library.tally(votes);
+        assertTrue(voteResults.contains("Bush"));
+    }
 
 }
