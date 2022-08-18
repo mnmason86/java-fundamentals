@@ -45,7 +45,7 @@ public class Library {
         return lowestArray;
     }
 
-    public static String[] tempNotSeen(int[][] temperatureArray){
+    public static String tempNotSeen(int[][] temperatureArray){
         //use HashSet type int to track unique temperatures
         HashSet<Integer> tempSet = new HashSet<>();
 
@@ -75,6 +75,28 @@ public class Library {
             }
         }
             //return String result
-            return new String[]{tempsNotFound.toString()};
+            return new String (tempsNotFound.toString());
     }
+
+    public static String tally (List<String> votes){
+        //create Hash Map to hold voting options (key) & vote count (value)
+        HashMap<String, Integer> voteTally = new HashMap<>();
+        //iterate over Array List
+        for (String ballot : votes) {
+            int voteCount = voteTally.containsKey(ballot) ? voteTally.get(ballot) : 0;
+            voteTally.put(ballot, voteCount += 1);
+        }
+        int mostVotes = 0;
+        String winner = "";
+        for(Map.Entry<String, Integer> voteMap : voteTally.entrySet()){
+            int totalVotes = voteMap.getValue();
+            if (totalVotes > mostVotes) {
+                mostVotes = totalVotes;
+                winner = voteMap.getKey();
+            }
+        }
+        System.out.println(winner);
+        return winner + " received the most votes!";
+
+    };
 }
