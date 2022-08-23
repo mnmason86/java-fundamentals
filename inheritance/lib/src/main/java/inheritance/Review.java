@@ -1,32 +1,25 @@
 package inheritance;
 
 public class Review{
-    public String body;
+    String body;
     public String author;
-    public int stars;
+    private int stars;
+    private Restaurant restaurant;
 
-    public Review(String body, String author, int stars) {
+    public Review(String body, String author, int stars, Restaurant restaurant) {
         this.body = body;
         this.author = author;
-        this.stars = stars;
+        setStars(stars);
+        this.restaurant = restaurant;
+    }
+
+
+    @Override
+    public String toString(){
+        return (author + " gave this restaurant a review of " + stars + " stars. Here's what they had to say about this restaurant: " + body);
     }
 
     //Getters and Setters
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public int getStars() {
         return stars;
@@ -36,13 +29,11 @@ public class Review{
         this.stars = stars;
     }
 
-    //Custom Methods
-    @Override
-    public String toString(){
-        return (author + " gave this restaurant a review of " + stars + " stars. Here's what they had to say about this restaurant: " + body);
-    }
-
     public void updateStars(int stars){
-        this.stars = stars;
+        if (stars < 0 || stars > 5){
+            throw new IllegalArgumentException(stars + " is out of range. Please " +
+                    "rate 1-5 stars");
+        }
+        setStars(stars);
     }
 }
