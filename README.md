@@ -6,3 +6,8 @@ Lab02 (BasicsLibrary) Collaboration: Rexie Esmeralda, SPECIAL THANKS to Ben Mill
 
 Lab06 (Inheritance) - Contains Restaunt and Review classes. 
 Collaboration: Stanley Wilder, Attribution: Ben Mills for setup help
+
+Lab07 (Inheritance & Abstract Class) - Addition of Business (abstract), Shop, and Theater classes.
+Collaboration: Stanley Wilder, Joshua Frazer, Attribution: Ben Mills 
+
+To test code: run `./gradlew test` from the terminal in java-fundamentals/inheritance
