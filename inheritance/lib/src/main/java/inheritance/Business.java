@@ -2,10 +2,9 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Business {
+public abstract class Business {
     public String name;
     public ArrayList<Review> reviews;
-    public float starRating;
     public String price;
     public int reviewItems = 0;
 
