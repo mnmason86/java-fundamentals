@@ -2,8 +2,7 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class
-Theater extends Business{
+public class Theater extends Business{
     private ArrayList<String> marquee;
 
     public Theater(String name, String price){
@@ -23,5 +22,13 @@ Theater extends Business{
     @Override
     public String toString(){
         return "Theater name: " + name + ", Price: " + price + ", Rating: " + getStarRating() + ", Now Showing: " + marquee;
+    }
+
+    public void addReview(MovieReview review){
+        review.setBusiness(this);
+        if(!reviews.contains(review)){
+            reviews.add(review);
+            reviewItems++;
+        }
     }
 }

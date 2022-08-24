@@ -9,8 +9,9 @@ public class Restaurant extends Business {
     public Restaurant(String name, String price){
         super(name,price);
     }
-
-
-
+    @Override
+    public String toString(){
+        return "Restaurant Name: " + name + ", Price: " + price;
+    }
 
 }
