@@ -10,16 +10,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RestaurantTest {
     @Test
     void toStringTest() {
-        Restaurant sut = new Restaurant("Wemdy's", null, "$$", 3);
-        assertEquals("Wemdy's has a rating of 3.0 and a price rating of $$",
-                sut.toString());
+        Restaurant sut = new Restaurant("Wemdy's", "$");
+        System.out.println(sut.toString());
+        assertTrue(sut.toString().equals("Business Name: Wemdy's, Price: $, " +
+                "Rating: 0" +
+                ".0"));
+
     }
 
     @Test
     void addReviewTest() {
-        Restaurant sut = new Restaurant("Wemdy's", null, "$$", 3);
-        Review sut2 = new Review("I have some opinions", "Person1", 4, sut);
-        sut.addReview(sut2);
-        assertTrue(sut2.body.equals("I have some opinions"));
+        User sutUser = new User("Patricia");
+        Restaurant restaurant = new Restaurant("McBronald's", "$");
+        Review sut = new Review("It's McBronald's, what can I say?",
+                sutUser, 2);
+        restaurant.addReview(sut);
+        assertTrue(restaurant.getReviewItems() == 1);
     }
 }

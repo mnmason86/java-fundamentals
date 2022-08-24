@@ -1,39 +1,34 @@
 package inheritance;
 
 public class Review{
-    String body;
-    public String author;
+    private String body;
+    private User author;
     private int stars;
-    private Restaurant restaurant;
 
-    public Review(String body, String author, int stars, Restaurant restaurant) {
+    public Review(String body, User author, int stars) {
         this.body = body;
         this.author = author;
-        setStars(stars);
-        this.restaurant = restaurant;
+        this.stars = stars;
     }
 
-
+    // Custom Methods
     @Override
     public String toString(){
-        return (author + " gave this restaurant a review of " + stars + " stars. Here's what they had to say about this restaurant: " + body);
+        return (author.getName() + " gave this restaurant a review of " + stars + " stars. " +
+                "Here's what they had to say about this business: " + body);
+    }
+    public void updateStars(int stars){
+        this.stars = stars;
     }
 
     //Getters and Setters
 
-    public int getStars() {
-        return stars;
+    public int getStarRating() {
+        return this.stars;
     }
 
-    public void setStars(int stars) {
-        this.stars = stars;
-    }
+    public String getBody(){ return this.body; }
 
-    public void updateStars(int stars){
-        if (stars < 0 || stars > 5){
-            throw new IllegalArgumentException(stars + " is out of range. Please " +
-                    "rate 1-5 stars");
-        }
-        setStars(stars);
-    }
+    public User getAuthor() { return this.author; };
+
 }
