@@ -7,17 +7,29 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class App {
     public static void main(String[] args) {
-        File gatesFile = new File("C:\\msys64\\home\\mnmas\\java-fundamentals\\linter\\app\\src\\main\\resources\\gates.js");
-        System.out.println(linter(gatesFile));
+        String linterLog = linter("\\main\\resources\\manyErrors.js");
     }
+   public static boolean hasSemicolon(String currentLine){
+       if (currentLine.endsWith("{") || currentLine.endsWith("}") || currentLine.endsWith(";")){
+           return true;
+       }
+       if (currentLine.contains("if") || currentLine.contains(
+               "else") || currentLine.contains("//") || currentLine.equals(
+               "")){
+           return true;
+       } else {
+           return false;
+       }
 
-    public static String linter(File someFile){
+   }
+    public static String linter(String newFileLocation){
+        File newFile =
+                new File(System.getProperty("user.dir") + "//src//" + newFileLocation);
         //create Scanner
         String typeErrors = "";
-        try(Scanner myScanner = new Scanner(someFile)) {
+        try(Scanner myScanner = new Scanner(newFile)) {
             //set line number
             int location = 0;
             while (myScanner.hasNextLine()) {
@@ -26,17 +38,18 @@ public class App {
                 //move to the next line
                 String currentLine = myScanner.nextLine();
                 //check conditions
-                if (currentLine.endsWith("{") || currentLine.endsWith("}") || currentLine.endsWith(";") || currentLine.contains("if") ||
-                        currentLine.contains("else")) {
-                    typeErrors = "";
-                } else {
-                    typeErrors += "Line " + location + ": missing semi-colon." + System.lineSeparator();
+                if(!hasSemicolon(currentLine)){
+                    String error =
+                            "Line " + location + ": missing semi-colon." + System.lineSeparator();
+                    typeErrors += error;
+                    System.out.println(error);
                 }
-                System.out.println(currentLine);
             }
-        } catch (IOException ioe){
-            ioe.printStackTrace();
+        } catch (IOException error){
+            error.printStackTrace();
         }
+        System.out.println(typeErrors.lines().count());
         return typeErrors;
     }
 }
+
