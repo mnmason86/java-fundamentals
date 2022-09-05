@@ -7,8 +7,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    void linterManyTest(){
+        assertTrue(App.linter("main\\resources\\manyErrors.js").lines().count() > 10);
+        assertEquals(App.linter("main\\resources\\empty-file.js").lines().count(),
+                0);
+        assertEquals(App.linter("main\\resources\\oneError.js").lines().count(), 1);
+        assertEquals(App.linter("main\\resources\\someErrors.js").lines().count(),
+                4);
+        assertEquals(App.linter("main\\resources\\noErrors.js").lines().count(), 0);
     }
 }
